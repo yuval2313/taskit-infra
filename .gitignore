@@ -1,0 +1,5 @@
+# Compiled
+.terraform*
+
+# Variables
+terraform.tfvars
