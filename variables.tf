@@ -29,3 +29,8 @@ variable name_prefix {
   type        = string
   description = "Name prefix for created resources"
 }
+variable instance_type {
+  type = string
+  default = "t3a.medium"
+  description = "Instance type for the EKS cluster"
+}

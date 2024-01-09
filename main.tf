@@ -23,4 +23,5 @@ module "eks" {
 
   # Optional
   node_group_max_size = 4
+  node_group_instance_type = var.instance_type
 }

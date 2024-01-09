@@ -35,10 +35,10 @@ variable node_group_disk_size {
   default     = 20
   description = "Disk size in GiB for worker nodes"
 }
-variable node_group_instance_types {
-  type        = list
-  default     = ["t3a.medium"]
-  description = "List of instance types associated with the EKS node group"
+variable node_group_instance_type {
+  type        = string
+  default     = "t3a.medium"
+  description = "Instance type for the EKS node group"
 }
 
 variable node_group_desired_size {
