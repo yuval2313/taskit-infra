@@ -22,7 +22,7 @@ Ensure you have the following prerequisites before getting started:
 
 1. Set an S3 bucket as the backend in `providers.tf`:
 
-```json
+```
 terraform {
   required_providers {
     aws = { ... }
@@ -38,7 +38,7 @@ terraform {
 provider "aws" { ... }
 ```
 
-2. Configure the project using your own `terraform.tfvars`:
+2. Update variables using your own `terraform.tfvars` to configure the project:
 
 ```sh
 owner_tag = "your.name"
@@ -63,3 +63,26 @@ terraform init
 ```sh
 terraform apply
 ```
+
+## Architecture
+
+When deploying this project we get the following architecture:
+
+![architecture.png](./docs/architecture.png)
+
+#### Network
+
+- **Virtual Private Cloud (VPC)**
+- **Internet Gateway (IGW)** - Internet Access for the VPC.
+- **Route Table** - Associated with both subnets and directing outbound traffic to IGW.
+- **2 Public Subnets** - Separate availability zones.
+
+#### Security
+
+- **Cluster IAM Role** - AWS managed policy `AmazonEKSClusterPolicy` attached.
+- **Node Group IAM Role** - Applied on managed nodes / instances with necessary privilages.
+
+#### EKS
+
+- **Cluster** - AWS managed Kubernetes cluster.
+- **Node Group** - Single node group with variable scale and instance type.
