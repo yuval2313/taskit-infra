@@ -22,6 +22,8 @@ module "eks" {
   subnet_id_2 = module.network.subnet_id_2
 
   # Optional
-  node_group_max_size = 4
   node_group_instance_type = var.instance_type
+  node_group_desired_size = var.desired_size
+  node_group_max_size = var.max_size
+  node_group_min_size = var.min_size
 }
