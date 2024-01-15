@@ -16,6 +16,7 @@ Ensure you have the following prerequisites before getting started:
 - **`network/`** - Creates the VPC for the cluster.
 - **`security/`** - Creates the necessary IAM roles for the cluster.
 - **`eks/`** - Deploys the EKS cluster, a node group, and required add-ons.
+- **`k8s/`** - Applies required kubernetes resources for bootstrapping the Task-it application via ArgoCD.
 - **`main.tf`** - Main module.
 
 ## Configuration
@@ -48,6 +49,8 @@ expiration_date_tag = "01-01-2099"
 # main.tf
 name_prefix = "custom-prefix"
 instance_type = "node-group-instance-type"
+apply_k8s_module = true
+...
 ```
 
 ## Deployment

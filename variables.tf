@@ -49,3 +49,10 @@ variable min_size {
   default = 2
   description = "Minimum node group scaling size for EKS cluster"
 }
+
+# k8s module
+variable apply_k8s_module {
+  type        = bool
+  default     = false
+  description = "Conditionally apply K8s in the cluster"
+}
