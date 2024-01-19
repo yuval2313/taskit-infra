@@ -36,17 +36,17 @@ variable instance_type {
 }
 variable desired_size {
   type = number
-  default = 2
+  default = 3
   description = "Desired node group scaling size for EKS cluster"
 }
 variable max_size {
   type = number
-  default = 2
+  default = 3
   description = "Maximum node group scaling size for EKS cluster"
 }
 variable min_size {
   type = number
-  default = 2
+  default = 3
   description = "Minimum node group scaling size for EKS cluster"
 }
 
