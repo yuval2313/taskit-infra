@@ -1,30 +1,22 @@
 # ArgoCD Config
 configs:
-  # Argo CD sensitive data
-  # Ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/user-management/#sensitive-data-and-sso-client-secrets
   secret:
     createSecret: true
     argocdServerAdminPassword: "$2a$10$FypmU/aJry8g/qchHs8zvudkZdSrrGv4MIQC8GRAkOR54Ok8AAINu"
+  params:
+    server.insecure: true
 
 # Server Config
 server:
   ingress:
     enabled: true
-    # -- Additional ingress annotations
-    # Works with ingress-nginx controller ssl-passthrough to allow argo to handle in flight encryption
     annotations:
-      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-      nginx.ingress.kubernetes.io/ssl-passthrough: "true"
-    # -- Additional ingress labels
-    labels: {}
-    # -- Defines which ingress controller will implement the resource
+      cert-manager.io/cluster-issuer: "letsencrypt"
     ingressClassName: nginx
     hosts:
       - argocd.taskit.in
     tls:
-      []
-      # - secretName: your-certificate-name
-      #   hosts:
-      #     - argocd.example.com
-
+      - hosts:
+          - argocd.taskit.in
+        secretName: argocd.taskit.in-tls
     https: true
