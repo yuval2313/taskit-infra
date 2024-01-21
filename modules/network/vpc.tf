@@ -19,23 +19,16 @@ resource "aws_internet_gateway" "igw" {
 }
 
 # Subnets
-resource "aws_subnet" "subnet_1" {
-  vpc_id     = aws_vpc.vpc.id
-  cidr_block = var.subnet_cidr_1
-  availability_zone = var.subnet_az_1
-  map_public_ip_on_launch = true
-  tags = {
-    Name = "${var.name_prefix}-sb1"
-  }
-}
+resource "aws_subnet" "subnet" {
+  count = var.subnet_count
 
-resource "aws_subnet" "subnet_2" {
-  vpc_id     = aws_vpc.vpc.id
-  cidr_block = var.subnet_cidr_2
-  availability_zone = var.subnet_az_2
-  map_public_ip_on_launch = true
+  vpc_id                  = aws_vpc.vpc.id
+  cidr_block              = cidrsubnet(var.vpc_cidr, var.subnet_cidr_offset, count.index)
+  availability_zone       = element(var.availability_zones, count.index % length(var.availability_zones))
+  map_public_ip_on_launch = var.map_public_ip_on_launch  # Set this variable based on your requirement
+
   tags = {
-    Name = "${var.name_prefix}-sb2"
+    Name = "${var.name_prefix}-subnet-${count.index + 1}"
   }
 }
 
@@ -54,11 +47,8 @@ resource "aws_route_table" "rt" {
 }
 
 resource "aws_route_table_association" "subnet_1" {
-  subnet_id      = aws_subnet.subnet_1.id
-  route_table_id = aws_route_table.rt.id
-}
+  count = var.subnet_count
 
-resource "aws_route_table_association" "subnet_2" {
-  subnet_id      = aws_subnet.subnet_2.id
+  subnet_id      = aws_subnet.subnet[count.index].id
   route_table_id = aws_route_table.rt.id
 }

@@ -24,11 +24,39 @@ variable expiration_date_tag {
   description = "expiration_date tag"
 }
 
-# main.tf
+# main.tf #
 variable name_prefix {
   type        = string
   description = "Name prefix for created resources"
 }
+
+# network
+variable vpc_cidr {
+  type        = string
+  default     = "10.0.0.0/16"
+  description = "VPC CIDR block"
+}
+variable subnet_count {
+  description = "Number of subnets to create"
+  default     = 2
+  type        = number
+}
+variable subnet_cidr_offset {
+  description = "CIDR mask for subnets"
+  type        = number
+  default     = 4
+}
+variable availability_zones {
+  description = "List of availability zones"
+  type        = list(string)
+}
+variable map_public_ip_on_launch {
+  type        = bool
+  default     = true
+  description = "Map public IPs on instances, subnet option"
+}
+
+# eks
 variable instance_type {
   type = string
   default = "t3a.medium"
@@ -50,7 +78,7 @@ variable min_size {
   description = "Minimum node group scaling size for EKS cluster"
 }
 
-# k8s module
+# k8s 
 variable apply_k8s_module {
   type        = bool
   default     = false

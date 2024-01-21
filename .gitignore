@@ -1,5 +1,6 @@
 # Compiled
 .terraform*
+*.tfstate
 
 # Variables
 terraform.tfvars

@@ -2,6 +2,11 @@ module "network" {
   source = "./modules/network"  
 
   name_prefix = var.name_prefix
+  vpc_cidr = var.vpc_cidr
+  subnet_count = var.subnet_count
+  subnet_cidr_offset = var.subnet_cidr_offset
+  availability_zones = var.availability_zones
+  map_public_ip_on_launch = var.map_public_ip_on_launch
 }
 
 module "security" {
@@ -17,8 +22,7 @@ module "eks" {
   name_prefix = var.name_prefix
   eks_cluster_role_arn = module.security.eks_cluster_role_arn
   eks_node_role_arn = module.security.eks_node_role_arn
-  subnet_id_1 = module.network.subnet_id_1
-  subnet_id_2 = module.network.subnet_id_2
+  subnet_ids = module.network.subnet_ids
 
   node_group_instance_type = var.instance_type
   node_group_desired_size = var.desired_size

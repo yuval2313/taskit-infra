@@ -3,7 +3,7 @@ resource "aws_eks_cluster" "cluster" {
   role_arn = var.eks_cluster_role_arn
 
   vpc_config {
-    subnet_ids = [var.subnet_id_1, var.subnet_id_2]
+    subnet_ids = var.subnet_ids
   }
 }
 
@@ -11,7 +11,7 @@ resource "aws_eks_node_group" "node_group" {
   cluster_name    = aws_eks_cluster.cluster.name
   node_group_name = "${var.name_prefix}-node-group"
   node_role_arn   = var.eks_node_role_arn
-  subnet_ids = [var.subnet_id_1, var.subnet_id_2]
+  subnet_ids = var.subnet_ids
 
   ami_type = var.node_group_ami_type
   disk_size = var.node_group_disk_size

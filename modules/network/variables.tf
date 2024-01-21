@@ -7,29 +7,25 @@ variable name_prefix {
 
 variable vpc_cidr {
   type        = string
-  default     = "10.0.0.0/16"
   description = "VPC CIDR block"
 }
 
-variable subnet_cidr_1 {
-  type        = string
-  default     = "10.0.0.0/20"
-  description = "subnet 1 CIDR block"
-}
-variable subnet_az_1 {
-  type        = string
-  default     = "eu-central-1a"
-  description = "availability zone for subnet 1"
+variable subnet_count {
+  description = "Number of subnets to create"
+  type        = number
 }
 
-
-variable subnet_cidr_2 {
-  type        = string
-  default     = "10.0.16.0/20"
-  description = "subnet 2 CIDR block"
+variable subnet_cidr_offset {
+  description = "CIDR offset for creating subnets"
+  type        = number
 }
-variable subnet_az_2 {
-  type        = string
-  default     = "eu-central-1b"
-  description = "availability zone for subnet 2"
+
+variable availability_zones {
+  description = "List of availability zones"
+  type        = list(string)
+}
+
+variable map_public_ip_on_launch {
+  type        = bool
+  description = "Map public IPs on instances, subnet option"
 }

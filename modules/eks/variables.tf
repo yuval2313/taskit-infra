@@ -15,13 +15,9 @@ variable eks_node_role_arn {
 }
 
 # Network
-variable subnet_id_1 {
-  type        = string 
-  description = "First subnet ID for Cluster"
-}
-variable subnet_id_2 {
-  type        = string 
-  description = "Second subnet ID for Cluster"
+variable subnet_ids {
+  type        = list(string) 
+  description = "Ids for subnets"
 }
 
 # Node group    
