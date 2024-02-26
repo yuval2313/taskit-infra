@@ -1,3 +1,7 @@
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
 # VPC
 resource "aws_vpc" "vpc" {
   cidr_block = var.vpc_cidr
@@ -24,7 +28,7 @@ resource "aws_subnet" "subnet" {
 
   vpc_id                  = aws_vpc.vpc.id
   cidr_block              = cidrsubnet(var.vpc_cidr, var.subnet_cidr_offset, count.index)
-  availability_zone       = element(var.availability_zones, count.index % length(var.availability_zones))
+  availability_zone       = element(data.aws_availability_zones.available.names, count.index % length(data.aws_availability_zones.available.names))
   map_public_ip_on_launch = var.map_public_ip_on_launch  # Set this variable based on your requirement
 
   tags = {

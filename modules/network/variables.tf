@@ -20,11 +20,6 @@ variable subnet_cidr_offset {
   type        = number
 }
 
-variable availability_zones {
-  description = "List of availability zones"
-  type        = list(string)
-}
-
 variable map_public_ip_on_launch {
   type        = bool
   description = "Map public IPs on instances, subnet option"

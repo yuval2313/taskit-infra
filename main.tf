@@ -5,7 +5,6 @@ module "network" {
   vpc_cidr = var.vpc_cidr
   subnet_count = var.subnet_count
   subnet_cidr_offset = var.subnet_cidr_offset
-  availability_zones = var.availability_zones
   map_public_ip_on_launch = var.map_public_ip_on_launch
 }
 
