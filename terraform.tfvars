@@ -1,0 +1,15 @@
+profile = "yuvall@develeap-course"
+region = "il-central-1"
+owner_tag = "yuval.levy"
+bootcamp_tag = 19   
+expiration_date_tag = "01.03.24" 
+name_prefix = "taskit"
+vpc_cidr = "10.0.0.0/16"
+subnet_count = 2
+subnet_cidr_offset = 4 
+map_public_ip_on_launch = false
+instance_type = "t3a.medium"
+desired_size = 3
+max_size = 3
+min_size = 3
+apply_k8s_module = true
